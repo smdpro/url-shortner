@@ -3,7 +3,7 @@ const { createClient } = require('redis');
 const { Url } = require('../models');
 const { notFound, badRequest,intenal } = require('../util/error');
 const validate = require('../util/validate');
-const client = createClient();
+const client = createClient({ url: 'redis://localhost:6379' });
 module.exports = {
   getLink: async (req, res, next) => {
     try {
