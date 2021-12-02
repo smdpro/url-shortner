@@ -1,4 +1,4 @@
-
+const { isArray } = require('util');
 module.exports.done = (res, message) => {
   return res.status(200).json({ message: message });
 };
@@ -6,7 +6,8 @@ module.exports.done = (res, message) => {
 module.exports.notFound = (res, message = 'error.not.found') => {
   return res.status(404).json({ message: message });
 };
-module.exports.badRequest = (res, message = 'error.bad.request') => {
+module.exports.badRequest = (res, error) => {
+  const message = isArray(error) && error.length > 0 ? error[0].message : error;
   return res.status(400).json({ message });
 };
 

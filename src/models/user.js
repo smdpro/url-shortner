@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
           );
         },
         validPassword: function (password) {
-         var hash = crypto
+         let hash = crypto
            .pbkdf2Sync(password, this.userName, 1000, 64, `sha512`)
            .toString(`hex`);
          return this.password === hash; 

@@ -8,7 +8,11 @@ const app = express();
 require('./startup/express-config')(app);
 
 
-app.use('/', routes);
+if (!process.env.JWT_PRIVATE_KEY){
+  console.log(`JWT_PRIVATE_KEY is not set : ${port}`.black.bgRed);
+  return ;
+}
+ app.use('/', routes);
 // app.use(error);
 const port =
   4000 +
