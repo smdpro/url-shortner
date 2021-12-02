@@ -10,7 +10,7 @@ router
   .get(controller.getAll);
 router
   .route('/:id')
-  .get(validateId(), controller.getById)
+  // .get(validateId(), controller.getById)
   .put(validateId(),controller.update)
   .delete(validateId(),controller.delete);
 

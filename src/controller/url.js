@@ -1,12 +1,13 @@
-const Url = require('../api/urlShortener/model');
+const Url = require('../models/url');
+const { DOMAIN } = require('../config');
 const { notFound, badRequest } = require('../util/error');
 const validate = require('../util/validate');
 
 module.exports = {
   getLink: async (req, res, next) => {
-    let result = await URL.findOne({ where: { code: req.params.id } });
+    let result = await URL.findOne({ where: { code: req.id } });
     if(!result) return notFound(res);
-    res.json(result);
+    res.redirect(result.longUrl);
   },
 
   getAll: async (req, res, next) => {
@@ -18,13 +19,13 @@ module.exports = {
 
   
   create: async (req, res, next) => {
-    // const error = validate(req.body);
-    // if (error) return badRequest(res, error);
-
+    if (!validate(req.body.lonUrl)) return badRequest(res);
+    
+    const code = shortid.generate();
     let url = new URL({
-      longUrl: req.body.title,
-      shortUrl: req.body.province,
-      code: req.userId,
+      longUrl: req.body.longUrl,
+      shortUrl: `${DOMAIN}/${code}`,
+      code: code,
     });
 
     url = await url.save();
@@ -57,8 +58,6 @@ module.exports = {
         code:req.id
       },
     });
-    // const result = await URL.findByIdAndRemove(req.id);
-    // if (!result) return notFound(res);
     res.json('URL.was.deleted');
   },
 };

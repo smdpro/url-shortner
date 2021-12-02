@@ -1,5 +1,5 @@
 module.exports = {
-  SITE_URL: 'localhost:4000',
+  DOMAIN: 'localhost:4000',
   DATABASE: {
     // URI: '',
     HOST: 'localhost',
