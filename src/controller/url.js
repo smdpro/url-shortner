@@ -22,7 +22,7 @@ module.exports = {
     if (!validate(req.body.lonUrl)) return badRequest(res);
     
     const code = shortid.generate();
-    let url = new URL({
+    let url = new URL.build({
       longUrl: req.body.longUrl,
       shortUrl: `${DOMAIN}/${code}`,
       code: code,
