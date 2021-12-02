@@ -34,10 +34,4 @@ const server = app.listen(port, '127.0.0.1', async() => {
 module.exports = server;
 
 
-// docker run \
-// --name=mysql \
-// --restart=always \
-// --env="MYSQL_ROOT_PASSWORD=123" \
-// --publish 3306:3306 \
-// --volume=/home/smd/mysql-data:/var/lib/mysql \
-// mysql
+

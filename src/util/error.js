@@ -14,3 +14,7 @@ module.exports.badRequest = (res, error) => {
 module.exports.forbidden = (res, message = 'error.access.denied') => {
   return res.status(403).json({ message: message });
 };
+
+module.exports.intenal = (res, message = 'error.internal') => {
+  return res.status(500).json({ message: message });
+};
