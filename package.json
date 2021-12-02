@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/smdpro/url-shortner#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "colors": "^1.4.0",
     "cors": "^2.8.5",
@@ -28,6 +29,9 @@
     "express-rate-limit": "^5.5.1",
     "helmet": "^4.6.0",
     "hpp": "^0.2.3",
+    "joi": "^17.5.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash.pick": "^4.4.0",
     "mysql2": "^2.3.3",
     "sequelize": "^6.12.0-alpha.1",
     "shortid": "^2.2.16",

@@ -29,6 +29,7 @@ module.exports = (sequelize, DataTypes) => {
           fields: ['code'],
         },
       ],
+      
     }
   );
   return Url;

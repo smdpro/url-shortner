@@ -1,17 +1,17 @@
-const Url = require('../models/url');
-const { DOMAIN } = require('../config');
+const {Url} = require('../models');
 const { notFound, badRequest } = require('../util/error');
 const validate = require('../util/validate');
 
 module.exports = {
   getLink: async (req, res, next) => {
-    let result = await URL.findOne({ where: { code: req.id } });
+    
+    let result = await Url.findOne({ where: { code: req.id } });
     if(!result) return notFound(res);
     res.redirect(result.longUrl);
   },
 
   getAll: async (req, res, next) => {
-    const result = await URL.findAll({
+    const result = await Url.findAll({
       attributes: ['longUrl', 'shortUrl', 'code'],
     });
     res.json(result);
@@ -22,9 +22,9 @@ module.exports = {
     if (!validate(req.body.lonUrl)) return badRequest(res);
     
     const code = shortid.generate();
-    let url = new URL.build({
+    let url = new Url.build({
       longUrl: req.body.longUrl,
-      shortUrl: `${DOMAIN}/${code}`,
+      shortUrl: `${process.env.BASE_URL}/${code}`,
       code: code,
     });
 
@@ -36,7 +36,7 @@ module.exports = {
   update: async (req, res, next) => {
 
     if (!validate(req.body.lonUrl)) return badRequest(res);
-    await URL.update(
+    await Url.update(
       { longUrl: req.body.lonUrl },
       {
         where: {
@@ -44,7 +44,7 @@ module.exports = {
         },
       }
     );
-    const result = await URL.findOne({
+    const result = await Url.findOne({
       where: { code: req.id },
       attributes: ['longUrl', 'shortUrl'],
     });
@@ -53,9 +53,9 @@ module.exports = {
   },
 
   delete: async (req, res, next) => {
-    await URL.destroy({
+    await Url.destroy({
       where: {
-        code:req.id
+        code: req.id,
       },
     });
     res.json('URL.was.deleted');
