@@ -25,8 +25,9 @@ const port =
   Number(process.env.NODE_APP_INSTANCE ? process.env.NODE_APP_INSTANCE : 0);
 const server = app.listen(port, '127.0.0.1', async() => {
   console.log(`API Server listening on port : ${port}`.black.bgYellow);
-  await db.sequelize.sync({force:true});
-  console.log(`Database was synced`.black.bgGreen);
+  // await db.sequelize.sync({ force: true });
+  await db.sequelize.authenticate({force:true});
+  console.log(`Database was connected`.black.bgGreen);
 });
 
 

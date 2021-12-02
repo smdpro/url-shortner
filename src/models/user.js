@@ -9,17 +9,26 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      // models.User.hasMany(models.Url, { foreignKey: 'userId' });
+    static associate({ Url }) {
+      this.hasMany(Url, { foreignKey: 'userId', as: 'urls' });
       // models.Url.belongsTo(models.User);
     }
+    generateAuthToken = function () {
+      return jwt.sign({ id: this.uuid }, process.env.JWT_PRIVATE_KEY);
+    };
+    validPassword = function (password) {
+      let hash = crypto
+        .pbkdf2Sync(password, this.userName, 1000, 64, `sha512`)
+        .toString(`hex`);
+      return this.password === hash;
+    };
   }
   User.init(
     {
       uuid: {
         type: DataTypes.UUID,
         primaryKey: true,
-        defaultValue: DataTypes.UUID4,
+        defaultValue: DataTypes.UUIDV4,
       },
       name: DataTypes.STRING,
       userName: DataTypes.STRING,
@@ -27,25 +36,18 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'users',
-      instanceMethods: {
-        generateAuthToken: function () {
-          return jwt.sign({ id: this.uuid }, process.env.JWT_PRIVATE_KEY);
-        },
-        validPassword: function (password) {
-          let hash = crypto
-            .pbkdf2Sync(password, this.uuid, 1000, 64, `sha512`)
-            .toString(`hex`);
-          return this.password === hash;
-        },
-      },
+      modelName: 'User',
+      tableName: 'users',
     }
   );
   User.beforeCreate(async (user, options) => {
+    // user.uuid=
     user.password = crypto
-      .pbkdf2Sync(user.password, user.uuid, 1000, 64, `sha512`)
+      .pbkdf2Sync(user.password, user.userName, 1000, 64, `sha512`)
       .toString(`hex`);
-
+    user.createdAt = new Date();
+    user.updatedAt = new Date();
   });
+  
   return User;
 };

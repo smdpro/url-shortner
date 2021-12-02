@@ -1,3 +1,4 @@
+const shortid =require('shortid');
 const { Url } = require('../models');
 const { notFound, badRequest } = require('../util/error');
 const validate = require('../util/validate');
@@ -18,27 +19,31 @@ module.exports = {
   },
 
   create: async (req, res, next) => {
-    if (!validate(req.body.lonUrl))
+    if (!validate(req.body.longUrl))
       return badRequest(res, [{ message: 'error.url.is.not.valid' }]);
 
     const code = shortid.generate();
-    let url = new Url.build({
+    let url = await Url.create({
       longUrl: req.body.longUrl,
       shortUrl: `${process.env.BASE_URL}/${code}`,
       code: code,
       userId: req.userId,
     });
 
-    url = await url.save();
+    const result = await Url.findOne({
+      where: { code: req.id, userId: req.userId },
+      attributes: ['longUrl', 'shortUrl','code'],
+    });
+    res.json(result);
 
     res.json(url);
   },
 
   update: async (req, res, next) => {
-    if (!validate(req.body.lonUrl))
+    if (!validate(req.body.longUrl))
       return badRequest(res, [{ message: 'error.url.is.not.valid' }]);
     await Url.update(
-      { longUrl: req.body.lonUrl },
+      { longUrl: req.body.longUrl, updatedAt:new Date() },
       {
         where: {
           code: req.id,
@@ -50,7 +55,6 @@ module.exports = {
       where: { code: req.id, userId: req.userId },
       attributes: ['longUrl', 'shortUrl'],
     });
-    if (!result) return notFound(res);
     res.json(result);
   },
 

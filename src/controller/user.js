@@ -1,4 +1,5 @@
 const pick = require('lodash.pick');
+//const uuid =require('uuid4')
 const { User } = require('../models');
 const { notFound, badRequest } = require('../util/error');
 const { validateSignup, validateSignin } = require('../service/user');
@@ -14,8 +15,8 @@ module.exports = {
       },
     });
     if (user) return badRequest(res,[{message:'error.user.already.exist'}]);
-    user = new User.build({ ...body });
-    user = await user.save();
+    user = await User.create(body);
+    // user = await user.save();
 
     res.json(user);
   },

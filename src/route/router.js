@@ -8,6 +8,7 @@ router
   .route('/')
   .post(controller.create)
   .get(controller.getAll);
+ 
 router
   .route('/:id')
   // .get(validateId(), controller.getById)

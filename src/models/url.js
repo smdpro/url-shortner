@@ -9,13 +9,19 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
+    static associate({User}) {
       // models.User.hasMany(models.Url, { foreignKey: 'userId' });
-      // models.Url.belongsTo(models.User);
+       this.belongsTo(User, { foreignKey: 'userId', as: 'user' });
       // define association here
     }
     toJSON() {
-      return { ...this.get(), id: undefined, userId: undefined };
+      return {
+        ...this.get(),
+        uuid: undefined,
+        userId: undefined,
+        createdAt: undefined,
+        updatedAt:undefined,
+      };
     }
   };
   Url.init(
@@ -27,7 +33,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'urls',
+      modelName: 'Url',
+      tableName: 'urls',
       indexes: [
         {
           unique: true,
