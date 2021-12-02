@@ -1,0 +1,49 @@
+{
+  "name": "url-shortner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cross-env NODE_ENV=test jest --watchAll --verbose",
+    "start": "cross-env NODE_ENV=development nodemon src/server.js",
+    "worker": "cross-env NODE_ENV=development nodemon src/worker.js",
+    "build": "cross-env NODE_ENV=development babel src -d dist",
+    "run": "cross-env NODE_ENV=development node src/server.js",
+    "patch": "cross-env NODE_ENV=development node src/server.js -p"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smdpro/url-shortner.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smdpro/url-shortner/issues"
+  },
+  "homepage": "https://github.com/smdpro/url-shortner#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.5.1",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.12.0-alpha.1",
+    "shortid": "^2.2.16",
+    "valid-url": "^1.0.9"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^23.6.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "babel-preset-env": "^1.7.0",
+    "cross-env": "^5.2.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.12.0",
+    "jest": "^27.4.3",
+    "nodemon": "^2.0.15",
+    "sequelize-cli": "^6.3.0",
+    "supertest": "^6.1.6"
+  }
+}
