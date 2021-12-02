@@ -31,20 +31,20 @@ module.exports = (sequelize, DataTypes) => {
             process.env.JWT_PRIVATE_KEY
           );
         },
-        validPassword: function (password) {
-         let hash = crypto
-           .pbkdf2Sync(password, this.userName, 1000, 64, `sha512`)
-           .toString(`hex`);
-         return this.password === hash; 
-        },
+        // validPassword: function (password) {
+        //  let hash = crypto
+        //    .pbkdf2Sync(password, this.userName, 1000, 64, `sha512`)
+        //    .toString(`hex`);
+        //  return this.password === hash; 
+        // },
       },
     }
   );
-  User.beforeCreate(async (user, options) => {
-    user.password = crypto
-      .pbkdf2Sync(user.password, user.userName, 1000, 64, `sha512`)
-      .toString(`hex`); 
+  // User.beforeCreate(async (user, options) => {
+  //   user.password = crypto
+  //     .pbkdf2Sync(user.password, user.userName, 1000, 64, `sha512`)
+  //     .toString(`hex`); 
     
-  });
+  // });
   return User;
 };

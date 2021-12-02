@@ -33,7 +33,7 @@
     "jsonwebtoken": "^8.5.1",
     "lodash.pick": "^4.4.0",
     "mysql2": "^2.3.3",
-    "sequelize": "^6.12.0-alpha.1",
+    "sequelize": "6.11.0",
     "shortid": "^2.2.16",
     "valid-url": "^1.0.9",
     "xss-clean": "^0.1.1"

@@ -11,7 +11,7 @@ if (!process.env.JWT_PRIVATE_KEY) {
   console.log(`JWT_PRIVATE_KEY is not set`.black.bgRed);
   return;
 }
-if (!process.env.process.env.BASE_URL) {
+if (!process.env.BASE_URL) {
   console.log(`BASE_URL is not set`.black.bgRed);
   return;
 }
@@ -20,7 +20,7 @@ if (!process.env.process.env.BASE_URL) {
  app.use('/', routes);
 // app.use(error);
 const port =
-  400 +
+  4000 +
   Number(process.env.NODE_APP_INSTANCE ? process.env.NODE_APP_INSTANCE : 0);
 const server = app.listen(port, '127.0.0.1', () => {
   db.sequelize.sync();
@@ -29,3 +29,12 @@ const server = app.listen(port, '127.0.0.1', () => {
 
 
 module.exports = server;
+
+
+// docker run \
+// --name=mysql \
+// --restart=always \
+// --env="MYSQL_ROOT_PASSWORD=123" \
+// --publish 3306:3306 \
+// --volume=/home/smd/mysql-data:/var/lib/mysql \
+// mysql

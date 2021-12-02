@@ -2,22 +2,22 @@
   "development": {
     "baseUrl": "localhost:4000",
     "username": "root",
-    "password": null,
-    "database": "url_shortener",
+    "password": "123",
+    "database": "url",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": null,
-    "database": "database_test",
+    "password": "123",
+    "database": "url",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
     "password": null,
-    "database": "url_shortener",
+    "database": "url",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }

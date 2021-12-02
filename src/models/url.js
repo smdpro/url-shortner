@@ -10,6 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      models.User.hasMany(models.Url);
+      models.Url.belongsTo(models.User);
       // define association here
     }
   };
@@ -22,7 +24,6 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'Url',
-      tableName: 'url-shorten',
       indexes: [
         {
           unique: true,

@@ -3,9 +3,9 @@
 module.exports = {
   development: {
     host: process.env.MYSQL_HOST || 'localhost',
-    database: process.env.MYSQL_DATABASE || 'test',
+    database: process.env.MYSQL_DATABASE || 'url_shortner',
     username: process.env.MYSQL_USER || 'root',
-    password: process.env.MYSQL_PASSWORD || 'password',
+    password: process.env.MYSQL_PASSWORD || '123',
     port: 3306,
     dialect: 'mysql',
     dialectOptions: {
@@ -14,9 +14,9 @@ module.exports = {
   },
   test: {
     host: process.env.MYSQL_HOST || 'localhost',
-    database: process.env.MYSQL_DATABASE || 'test',
+    database: process.env.MYSQL_DATABASE || 'url_shortner',
     username: process.env.MYSQL_USER || 'root',
-    password: process.env.MYSQL_PASSWORD || 'password',
+    password: process.env.MYSQL_PASSWORD || '123',
     port: 3306,
     dialect: 'mysql',
     dialectOptions: {
@@ -25,9 +25,9 @@ module.exports = {
   },
   production: {
     host: process.env.MYSQL_HOST || 'localhost',
-    database: process.env.MYSQL_DATABASE || 'test',
+    database: process.env.MYSQL_DATABASE || 'url_shortner',
     username: process.env.MYSQL_USER || 'root',
-    password: process.env.MYSQL_PASSWORD || 'password',
+    password: process.env.MYSQL_PASSWORD || '123',
     port: 3306,
     dialect: 'mysql',
     dialectOptions: {
