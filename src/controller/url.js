@@ -45,11 +45,11 @@ module.exports = {
         userId: req.userId,
       });
 
-      const result = await Url.findOne({
-        where: { code: req.id, userId: req.userId },
-        attributes: ['longUrl', 'shortUrl', 'code'],
-      });
-      res.json(result);
+      // const result = await Url.findOne({
+      //   where: { code: req.id, userId: req.userId },
+      //   attributes: ['longUrl', 'shortUrl', 'code'],
+      // });
+      res.json(url);
 
     } catch (error) {
       intenal(res);
