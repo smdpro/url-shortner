@@ -2,14 +2,11 @@
   "name": "url-shortner",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test jest --watchAll --verbose",
     "start": "cross-env NODE_ENV=development nodemon src/server.js",
-    "worker": "cross-env NODE_ENV=development nodemon src/worker.js",
-    "build": "cross-env NODE_ENV=development babel src -d dist",
-    "run": "cross-env NODE_ENV=development node src/server.js",
-    "patch": "cross-env NODE_ENV=development node src/server.js -p"
+    "build": "cross-env NODE_ENV=development babel src -d dist"
   },
   "repository": {
     "type": "git",
@@ -23,6 +20,7 @@
   },
   "homepage": "https://github.com/smdpro/url-shortner#readme",
   "dependencies": {
+    "cross-env": "^7.0.3",
     "express": "^4.17.1",
     "express-rate-limit": "^5.5.1",
     "mysql2": "^2.3.3",
@@ -37,7 +35,6 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "babel-preset-env": "^1.7.0",
-    "cross-env": "^5.2.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.12.0",

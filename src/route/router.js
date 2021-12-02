@@ -1,5 +1,5 @@
 const express = require('express');
-const controller = require('../controller/controller');
+const controller = require('../controller/url');
 const validateId = require('../middleware/validate');
 const router = express.Router();
 
