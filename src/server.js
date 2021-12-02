@@ -6,6 +6,7 @@ var db = require('./models');
 const app = express();
 
 require('./startup/express-config')(app);
+require('./startup/logger')(app);
 
 if (!process.env.JWT_PRIVATE_KEY) {
   console.log(`JWT_PRIVATE_KEY is not set`.black.bgRed);

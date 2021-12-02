@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       longUrl: DataTypes.STRING,
       shortUrl: DataTypes.STRING,
       code: DataTypes.STRING,
+      userId: DataTypes.INTEGER,
     },
     {
       sequelize,
@@ -30,7 +31,6 @@ module.exports = (sequelize, DataTypes) => {
           fields: ['code'],
         },
       ],
-      
     }
   );
   return Url;
