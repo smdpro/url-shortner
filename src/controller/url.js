@@ -7,6 +7,7 @@ const client = createClient({ url: 'redis://localhost:6379' });
 module.exports = {
   getLink: async (req, res, next) => {
     try {
+      await client.connect();
       const value = await client.get(req.id);
       if (value) return res.redirect(value);
       let result = await Url.findOne({ where: { code: req.id } });
@@ -74,6 +75,7 @@ module.exports = {
         where: { code: req.id, userId: req.userId },
         attributes: ['longUrl', 'shortUrl'],
       });
+      await client.connect();
       await client.set(req.id, result.longUrl);
       res.json(result);
     } catch (error) {
@@ -90,6 +92,7 @@ module.exports = {
           userId: req.userId,
         },
       });
+      await client.connect();
       await client.del(req.id);
       res.json('URL.was.deleted');
     } catch (error) {

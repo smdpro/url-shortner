@@ -1,5 +1,6 @@
 
 const express = require('express');
+const { createClient } = require('redis');
 require('colors');
 const routes = require('./route');
 var db = require('./models');
@@ -17,7 +18,9 @@ if (!process.env.BASE_URL) {
   return;
 }
   
+const client = createClient({ url: 'redis://127.0.0.1:6379' });
 
+client.get('10').then(v=>console.log('v',v));
  app.use('/', routes);
 // app.use(error);
 const port =
