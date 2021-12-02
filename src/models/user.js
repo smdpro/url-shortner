@@ -10,16 +10,16 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      models.User.hasMany(models.Url);
-      models.Url.belongsTo(models.User);
+      // models.User.hasMany(models.Url, { foreignKey: 'userId' });
+      // models.Url.belongsTo(models.User);
     }
   }
   User.init(
     {
-      id: {
-        type: DataTypes.INTEGER,
+      uuid: {
+        type: DataTypes.UUID,
         primaryKey: true,
-        autoIncrement: true,
+        defaultValue: DataTypes.UUID4,
       },
       name: DataTypes.STRING,
       userName: DataTypes.STRING,
@@ -27,26 +27,23 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: 'User',
+      modelName: 'users',
       instanceMethods: {
         generateAuthToken: function () {
-          return jwt.sign(
-            { id: this.id },
-            process.env.JWT_PRIVATE_KEY
-          );
+          return jwt.sign({ id: this.uuid }, process.env.JWT_PRIVATE_KEY);
         },
         validPassword: function (password) {
-         let hash = crypto
-           .pbkdf2Sync(password, this.userName, 1000, 64, `sha512`)
-           .toString(`hex`);
-         return this.password === hash;
+          let hash = crypto
+            .pbkdf2Sync(password, this.uuid, 1000, 64, `sha512`)
+            .toString(`hex`);
+          return this.password === hash;
         },
       },
     }
   );
   User.beforeCreate(async (user, options) => {
     user.password = crypto
-      .pbkdf2Sync(user.password, user.userName, 1000, 64, `sha512`)
+      .pbkdf2Sync(user.password, user.uuid, 1000, 64, `sha512`)
       .toString(`hex`);
 
   });

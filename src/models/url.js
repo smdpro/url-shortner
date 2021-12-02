@@ -10,9 +10,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      models.User.hasMany(models.Url);
-      models.Url.belongsTo(models.User);
+      // models.User.hasMany(models.Url, { foreignKey: 'userId' });
+      // models.Url.belongsTo(models.User);
       // define association here
+    }
+    toJSON() {
+      return { ...this.get(), id: undefined, userId: undefined };
     }
   };
   Url.init(
@@ -20,11 +23,11 @@ module.exports = (sequelize, DataTypes) => {
       longUrl: DataTypes.STRING,
       shortUrl: DataTypes.STRING,
       code: DataTypes.STRING,
-      userId: DataTypes.INTEGER,
+      userId: DataTypes.UUID,
     },
     {
       sequelize,
-      modelName: 'Url',
+      modelName: 'urls',
       indexes: [
         {
           unique: true,
