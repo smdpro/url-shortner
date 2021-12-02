@@ -7,15 +7,20 @@ const app = express();
 
 require('./startup/express-config')(app);
 
-
-if (!process.env.JWT_PRIVATE_KEY){
-  console.log(`JWT_PRIVATE_KEY is not set : ${port}`.black.bgRed);
-  return ;
+if (!process.env.JWT_PRIVATE_KEY) {
+  console.log(`JWT_PRIVATE_KEY is not set`.black.bgRed);
+  return;
 }
+if (!process.env.process.env.BASE_URL) {
+  console.log(`BASE_URL is not set`.black.bgRed);
+  return;
+}
+  
+
  app.use('/', routes);
 // app.use(error);
 const port =
-  4000 +
+  400 +
   Number(process.env.NODE_APP_INSTANCE ? process.env.NODE_APP_INSTANCE : 0);
 const server = app.listen(port, '127.0.0.1', () => {
   db.sequelize.sync();

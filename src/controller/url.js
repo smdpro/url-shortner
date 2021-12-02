@@ -19,7 +19,7 @@ module.exports = {
 
   
   create: async (req, res, next) => {
-    if (!validate(req.body.lonUrl)) return badRequest(res);
+    if (!validate(req.body.lonUrl)) return badRequest(res,[{message:'error.url.is.not.valid'}]);
     
     const code = shortid.generate();
     let url = new Url.build({
@@ -35,7 +35,7 @@ module.exports = {
 
   update: async (req, res, next) => {
 
-    if (!validate(req.body.lonUrl)) return badRequest(res);
+    if (!validate(req.body.lonUrl)) return badRequest(res, [{ message: 'error.url.is.not.valid' }]);
     await Url.update(
       { longUrl: req.body.lonUrl },
       {
