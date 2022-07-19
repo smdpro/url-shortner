@@ -1,20 +1,21 @@
 const { isArray } = require('util');
+const httpStatus = require('http-status');
 module.exports.done = (res, message) => {
-  return res.status(200).json({ message: message });
+  return res.status(httpStatus.OK).json({ message: message });
 };
 
 module.exports.notFound = (res, message = 'error.not.found') => {
-  return res.status(404).json({ message: message });
+  return res.status(httpStatus.NOT_FOUND).json({ message: message });
 };
 module.exports.badRequest = (res, error) => {
   const message = isArray(error) && error.length > 0 ? error[0].message : error;
-  return res.status(400).json({ message });
+  return res.status(httpStatus.BAD_REQUEST).json({ message });
 };
 
 module.exports.forbidden = (res, message = 'error.access.denied') => {
-  return res.status(403).json({ message: message });
+  return res.status(httpStatus.FORBIDDEN).json({ message: message });
 };
 
 module.exports.internal = (res, message = 'error.internal') => {
-  return res.status(500).json({ message: message });
+  return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: message });
 };
