@@ -1,7 +1,6 @@
-const pick = require('lodash.pick');
-//const uuid =require('uuid4')
+const pick = require('../utilpick');
 const { User } = require('../models');
-const { notFound, badRequest, intenal } = require('../util/error');
+const { notFound, badRequest, internal } = require('../util/error');
 const { validateSignup, validateSignin } = require('../service/user');
 
 module.exports = {
@@ -21,7 +20,7 @@ module.exports = {
 
       res.json(user);
     } catch (error) {
-      intenal(res);
+      internal(res);
     }
   },
 
@@ -37,15 +36,9 @@ module.exports = {
       });
       if (!user) return notFound(res, 'error.user.not.found');
       let token = user.generateAuthToken();
-      // const result = await User.findOne({
-      //   where: { code: req.id },
-      //   attributes: ['longUrl', 'shortUrl'],
-      // });
-      // if (!result) return notFound(res);
       res.json({ token });
     } catch (error) {
-      intenal(res);
+      internal(res);
     }
-    
   },
 };

@@ -1,7 +1,7 @@
-const shortid =require('shortid');
+const shortid = require('shortid');
 const { createClient } = require('redis');
 const { Url } = require('../models');
-const { notFound, badRequest,intenal } = require('../util/error');
+const { notFound, badRequest, internal } = require('../util/error');
 const validate = require('../util/validate');
 const client = createClient({ url: 'redis://localhost:6379' });
 module.exports = {
@@ -15,9 +15,8 @@ module.exports = {
       await client.set(req.id, result.longUrl);
       res.redirect(result.longUrl);
     } catch (error) {
-      intenal(res);
+      internal(res);
     }
-    
   },
 
   getAll: async (req, res, next) => {
@@ -28,9 +27,8 @@ module.exports = {
       });
       res.json(result);
     } catch (error) {
-      intenal(res);
+      internal(res);
     }
-    
   },
 
   create: async (req, res, next) => {
@@ -51,11 +49,9 @@ module.exports = {
       //   attributes: ['longUrl', 'shortUrl', 'code'],
       // });
       res.json(url);
-
     } catch (error) {
-      intenal(res);
+      internal(res);
     }
-    
   },
 
   update: async (req, res, next) => {
@@ -79,9 +75,8 @@ module.exports = {
       await client.set(req.id, result.longUrl);
       res.json(result);
     } catch (error) {
-      intenal(res);
+      internal(res);
     }
-    
   },
 
   delete: async (req, res, next) => {
@@ -96,8 +91,7 @@ module.exports = {
       await client.del(req.id);
       res.json('URL.was.deleted');
     } catch (error) {
-      intenal(res);
+      internal(res);
     }
-    
   },
 };
