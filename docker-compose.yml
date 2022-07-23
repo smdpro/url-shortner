@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    environment:
+      - MONGODB_URL=mongodb://mongodb:27017/app
+    ports:
+      - '3000:3000'
+    depends_on:
+      - mongodb
+    volumes:
+      - .:/opt/app
+    networks:
+      - app-net
+
+  mongodb:
+    image: mongo:4.2.1-bionic
+    ports:
+      - '27017:27017'
+    volumes:
+      - dbdata:/data/db
+    networks:
+      - app-net
+  redis:
+    image: redis:4.0.6
+    ports:
+      - '6379:6379'
+    networks:
+      - app-net  
+volumes:
+  dbdata:
+
+networks:
+  app-net:
+    driver: bridge
