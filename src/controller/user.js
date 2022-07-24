@@ -1,4 +1,4 @@
-const pick = require('../utilpick');
+const pick = require('../util/pick');
 const { User } = require('../models');
 const { notFound, badRequest, internal } = require('../util/error');
 const { validateSignup, validateSignin } = require('../service/user');

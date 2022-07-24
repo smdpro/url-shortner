@@ -1,7 +1,7 @@
 /dist
 /tmp
 /out-tsc
-
+/data
 # dependencies
 /node_modules
 package-lock.json

@@ -2,30 +2,39 @@ version: '3'
 
 services:
   app:
+    container_name: app-url
     build: .
-    environment:
-      - MONGODB_URL=mongodb://mongodb:27017/app
     ports:
       - '3000:3000'
-    depends_on:
-      - mongodb
     volumes:
-      - .:/opt/app
+      - ".:/opt/app"  
+    depends_on:
+      - mysql
+      - redis
     networks:
       - app-net
 
-  mongodb:
-    image: mongo:4.2.1-bionic
+  mysql:
+    container_name: app-url-mysql
+    image: mysql:8
+    environment:
+      - MYSQL_DATABASE=app-url
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=smd
+      - MYSQL_PASSWORD=p@ssword
     ports:
-      - '27017:27017'
+      - '3306:3306'
     volumes:
-      - dbdata:/data/db
+      - dbdata:/var/lib/mysql
     networks:
       - app-net
   redis:
-    image: redis:4.0.6
+    container_name: app-url-redis
+    image: redis
     ports:
       - '6379:6379'
+    volumes:
+      - /tmp/redis:/data
     networks:
       - app-net  
 volumes:

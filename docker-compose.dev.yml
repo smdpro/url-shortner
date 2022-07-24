@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  app:
+    container_name: app-url-dev
+    env_file:
+      - ./.env.dev
+    command: yarn run dev
+    # command: sh -c "sequelize db:migrate && yarn run dev"

@@ -1,8 +1,9 @@
 
 const express = require('express');
 const { createClient } = require('redis');
+require('dotenv').config();
 require('colors');
-const routes = require('./route/v1');
+const routes = require('./route');
 var db = require('./models');
 const app = express();
 

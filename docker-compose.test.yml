@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  app:
+    env_file:
+      - .env.test
+    container_name: app-url-test
+    command: bash -c "sequelize db:migrate && yarn test"
