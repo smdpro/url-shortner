@@ -17,11 +17,8 @@ services:
   mysql:
     container_name: app-url-mysql
     image: mysql:8
-    environment:
-      - MYSQL_DATABASE=app-url
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_USER=smd
-      - MYSQL_PASSWORD=p@ssword
+    env_file:
+      - ./.env.dev
     ports:
       - '3306:3306'
     volumes:
@@ -42,4 +39,4 @@ volumes:
 
 networks:
   app-net:
-    driver: bridge
+   driver: bridge

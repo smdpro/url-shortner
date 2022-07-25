@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
-console.log('process.env.MYSQL_DB==>', process.env.MYSQL_DB);
-module.exports = new Sequelize(process.env.MYSQL_DB, process.env.MYSQL_USER, process.env.MYSQL_PASSWORD, {
+console.log('process.env.MYSQL_URL==>', process.env.MYSQL_URL);
+module.exports = new Sequelize(process.env.MYSQL_URL, {
+  host: 'mysql',
   dialect: 'mysql' /* one of 'mysql' | 'mariadb' | 'postgres' | 'mssql' */,
   operatorsAliases: false,
 
